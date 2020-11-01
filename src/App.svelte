@@ -16,6 +16,12 @@ export let name;
 
 let app = new App();
 
+window.oncontextmenu = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    return false;
+};
+
 onMount(async () => {
   await app.init();
   app.createCpuPianoKeyboard(document.getElementById("cpuKeyboard"));
