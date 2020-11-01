@@ -62,10 +62,25 @@ export class PianoKeyboardGUIHandler implements MessageDispatcher {
         svg.addEventListener('mouseupoutside', this.onMouseUp.bind(this));
         svg.addEventListener('mousemove', this.onMouseMove.bind(this));
 
-        // svg.addEventListener("ontouchstart", this.onTouchStart.bind(this));
-        // svg.addEventListener("ontouchmove", this.onTouchMove.bind(this));
-        // svg.addEventListener("ontouchcancel", this.onTouchEnd.bind(this));
-        // svg.addEventListener("ontouchend", this.onTouchEnd.bind(this));
+        svg.addEventListener("touchstart", this.onTouchStart.bind(this));
+        svg.addEventListener("touchmove", this.onTouchMove.bind(this));
+        svg.addEventListener("touchcancel", this.onTouchEnd.bind(this));
+        svg.addEventListener("touchend", this.onTouchEnd.bind(this));
+    }
+
+    onTouchStart(e: TouchEvent) {
+        const t = e.touches[0];
+        this.onDown(t.clientX, t.clientY);
+    }
+    onTouchMove(e: TouchEvent) {
+        // console.log(e);
+        const t = e.touches[0];
+        this.onMove(t.clientX, t.clientY);
+    }
+    onTouchEnd(e: TouchEvent) {
+        // console.log(e);
+        const t = e.touches[0];
+        this.onUp(t.clientX, t.clientY);
     }
 
     private findKeyUnder(x: number, y: number) {
@@ -79,28 +94,19 @@ export class PianoKeyboardGUIHandler implements MessageDispatcher {
     }
 
     private isMouseDown: boolean = false;
-    private onMouseDown(event: MouseEvent) {
+    private onDown(x: number, y: number) {
         this.isMouseDown = true;
-        const key = this.findKeyUnder(event.clientX, event.clientY);
+        const key = this.findKeyUnder(x, y);
         if (!!key) {
             this.fireEvent(key.midiNote, "on");
             // this.keyboard.noteOn(key.midiNote);
         }
     }
-
-    private onMouseUp(event: MouseEvent) {
-        this.isMouseDown = false;
-        const key = this.findKeyUnder(event.clientX, event.clientY);
-        if (!!key) {
-            this.fireEvent(key.midiNote, "off");
-            // this.keyboard.noteOff(key.midiNote);
-        }
-    }
-    private onMouseMove(event: MouseEvent) {
+    private onMove(x: number, y: number) {
         if (!this.isMouseDown) {
             return;
         }
-        const key = this.findKeyUnder(event.clientX, event.clientY);
+        const key = this.findKeyUnder(x, y);
         const currentlyDown = this.keys.filter(k => k.isDown);
         if (currentlyDown.indexOf(key) >= 0) {
             return;
@@ -110,5 +116,23 @@ export class PianoKeyboardGUIHandler implements MessageDispatcher {
             this.fireEvent(key.midiNote, "on");
             // this.keyboard.noteOn(key.midiNote);
         }
+    }
+    private onUp(x: number, y: number) {
+        this.isMouseDown = false;
+        const key = this.findKeyUnder(x, y);
+        if (!!key) {
+            this.fireEvent(key.midiNote, "off");
+            // this.keyboard.noteOff(key.midiNote);
+        }
+    }
+
+    private onMouseDown(event: MouseEvent) {
+        this.onDown(event.clientX, event.clientY);
+    }
+    private onMouseUp(event: MouseEvent) {
+        this.onUp(event.clientX, event.clientY);
+    }
+    private onMouseMove(event: MouseEvent) {
+        this.onMove(event.clientX, event.clientY);
     }
 }

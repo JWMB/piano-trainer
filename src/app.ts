@@ -50,7 +50,7 @@ export class App {
     }
 
     createPianoInput(piano: PianoKeyboard, parentElement: HTMLElement) {
-        piano.createKeys(Notes.defaultC4 - 12, Notes.defaultC4 + 24, { x: 30, y: 90 });
+        piano.createKeys(Notes.defaultC4 - 12, Notes.defaultC4 + 24, { x: 70, y: 200 });
         if (parentElement.children.length > 0) {
             return null;
         }
@@ -59,8 +59,8 @@ export class App {
 
         pianoInput.createGfx(svg, piano.getKeys());
 
-        svg.setAttribute("width", `${1000}`);
-        // svg.setAttribute("height", `${300}`);
+        svg.setAttribute("width", `${1600}`);
+        svg.setAttribute("height", `${300}`);
         parentElement.appendChild(svg);
 
         return pianoInput;
