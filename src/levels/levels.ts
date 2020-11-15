@@ -33,6 +33,15 @@ export const levels: LevelDefinition[] = [
     { tempo: 80, chords: "Cmaj7add2", melody: <GenerateMelodyDefinition>{ startNotes: [0, 4], numNotes: 2, maxDistance: 5, showNotes: true } },
     { tempo: 80, chords: "Am7add2", melody: <GenerateMelodyDefinition>{ startNotes: [0, 3], numNotes: 2, maxDistance: 5, showNotes: true } },
     { tempo: 120, chords: "Cadd2 Am7 Dm7 Gadd2", melody: <GenerateMelodyDefinition>{ startNotes: [0], numNotes: 16, notesPerChord:4, maxDistance: 5, showNotes: true } },
+    { tempo: 120,
+        chords: [
+            "Dm - - - Dm - - - Dm - - - Dm - - -",
+            "Dm - - - Dm - - - Dm - - - Dm - - -",
+        ].join(" "),
+        melody: <FixedMelodyDefinition>{ notes: [
+            "d - e - f - e - d e f e d - - -",
+            "a3 - g3 - f3 - g3 - a3 g3 f3 e3 d3 - - -",
+        ].join(" ")}},
     { tempo: 80,
         chords: [
             "C - - - C - - -",

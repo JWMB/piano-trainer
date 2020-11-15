@@ -3,6 +3,7 @@ import { AllSoundOffMessage, Message, MessageReceiver, NoteOffMessage, NoteOnMes
 import { EqualTemperament, NoteHzConvert } from "./tonality";
 import { AudioContextProxy, EnvelopeADSR, SimpleVoice, Voice } from "./voice";
 
+// https://hacks.mozilla.org/2020/05/high-performance-web-audio-with-audioworklet-in-firefox/
 export class FrequencyComponents {
     real: Float32Array;
     imag: Float32Array;
