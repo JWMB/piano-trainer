@@ -59,7 +59,7 @@ export class App {
 
         pianoInput.createGfx(svg, piano.getKeys());
 
-        svg.setAttribute("width", `${1600}`);
+        svg.setAttribute("width", `${1500}`);
         svg.setAttribute("height", `${300}`);
         parentElement.appendChild(svg);
 

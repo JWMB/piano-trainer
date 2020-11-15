@@ -99,7 +99,6 @@ export class PianoKeyboardGUIHandler implements MessageDispatcher {
         const key = this.findKeyUnder(x, y);
         if (!!key) {
             this.fireEvent(key.midiNote, "on");
-            // this.keyboard.noteOn(key.midiNote);
         }
     }
     private onMove(x: number, y: number) {
@@ -111,10 +110,9 @@ export class PianoKeyboardGUIHandler implements MessageDispatcher {
         if (currentlyDown.indexOf(key) >= 0) {
             return;
         }
-        currentlyDown.forEach(k => this.fireEvent(k.midiNote, "off")); //this.keyboard.noteOff(k.midiNote));
+        currentlyDown.forEach(k => this.fireEvent(k.midiNote, "off"));
         if (!!key) {
             this.fireEvent(key.midiNote, "on");
-            // this.keyboard.noteOn(key.midiNote);
         }
     }
     private onUp(x: number, y: number) {
@@ -122,7 +120,6 @@ export class PianoKeyboardGUIHandler implements MessageDispatcher {
         const key = this.findKeyUnder(x, y);
         if (!!key) {
             this.fireEvent(key.midiNote, "off");
-            // this.keyboard.noteOff(key.midiNote);
         }
     }
 
